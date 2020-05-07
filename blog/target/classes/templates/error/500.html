@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <!-- 移动端预览方案 -->
+    <meta name="viewport" content="width=device-width,inital-scale=1.0" />
+    <title>404 NotFound！</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link href="../static/css/custom.css" rel="stylesheet" th:href="@{/css/custom.css}"/>
+    <script src="../static/js/vue.js" type="text/javascript" th:href="@{/js/vue.js}"></script>
+</head>
+<body>
+<!-- 导航栏 -->
+<nav th:replace="_fragments :: menu(0)" class="ui inverted attached segment c-padded-tb-mini c-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">Blog</h2>
+            <a href="#" class="c-item item c-mobile-hide"><i class="home icon"></i>首页</a>
+            <a href="#" class="c-item item c-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="active c-item item c-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a href="#" class="c-item item c-mobile-hide"><i class="clone icon"></i>归档</a>
+            <a href="#" class="c-item item c-mobile-hide"><i class="info icon"></i>关于我</a>
+            <div class="right c-item item c-mobile-hide">
+                <div class="ui icon inverted transparent input">
+                    <input type="text" name="" id="" value="" placeholder="搜索....." />
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 手机端按钮 -->
+    <a href="#" class="ui icon black c-right-top c-mobile-show button menu toggle">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="c-container-small c-padded-tb-massive">
+    <div class="ui error message c-padded-tb-huge">
+        <div class="ui contianer">
+            <h2>500</h2>
+            <p>服务器发生错误，请联系管理员</p>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<!-- 底部footer -->
+<footer th:replace="_fragments :: footer" class="ui inverted segment vertical c-padded-tb-massive">
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+<script type="text/javascript">
+    $('.menu.toggle').click(function() {
+        $('.c-item').toggleClass('c-mobile-hide');
+    });
+</script>
+</body>
+</html>

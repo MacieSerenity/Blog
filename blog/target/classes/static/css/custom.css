@@ -1,0 +1,222 @@
+body {
+	background: url(../img/bg/bg.png);
+}
+
+/* padding===================== */
+
+.c-padded-mini {
+	padding: 0.2em !important;
+}
+
+.c-padded {
+	padding: 1em !important;
+}
+
+.c-padded-tiny {
+	padding: 0.3em !important;
+}
+
+/* 控制首页最上方的padding宽度 */
+.c-padded-tb-mini {
+	padding-top: 0.2em !important;
+	padding-bottom: 0.2em !important;
+}
+
+.c-padded-tb-tiny {
+	padding-top: 0.3em !important;
+	padding-bottom: 0.3em !important;
+}
+
+.c-padded-tb-small {
+	padding-top: 0.5em !important;
+	padding-bottom: 0.5em !important;
+}
+
+.c-padded-tb {
+	padding-top: 1em !important;
+	padding-bottom: 1em !important;
+}
+
+.c-padded-tb-large {
+	padding-top: 2em !important;
+	padding-bottom: 2em !important;
+}
+
+.c-padded-tb-big {
+	padding-top: 3em !important;
+	padding-bottom: 3em !important;
+}
+
+.c-padded-tb-huge {
+	padding-top: 4em !important;
+	padding-bottom: 4em !important;
+}
+
+.c-padded-lr-responsive{
+	padding-left: 4em !important;
+	padding-right: 4em !important;
+}
+
+/* 控制footer的padding */
+/* massive adj. 大量的；巨大的，厚重的；魁伟的 */
+.c-padded-tb-massive {
+	padding-top: 5em !important;
+	padding-bottom: 5em !important;
+}
+
+.c-row-padded-lr{
+	padding-left: 1rem !important;
+	padding-right: 1rem !important;
+}
+
+/* text setting ===========================*/
+
+/* 字体粗细 */
+/* thin vi. 变薄；变瘦；变淡 */
+.c-text-thin {
+	font-weight: 300 !important;
+}
+
+/* 字符间距 */
+.c-text-spaced {
+	letter-spacing: 1px !important;
+}
+
+/* 1.8倍行间距 */
+.c-text-lined {
+	line-height: 1.8;
+}
+
+/* 透明度 */
+.c-opacity-mini {
+	opacity: .8;
+}
+
+.c-opacity-tiny {
+	opacity: .6;
+}
+
+/* margin================================== */
+.c-margin-tb-tiny {
+	margin-top: 0.3em !important;
+	margin-bottom: 0.3em !important;
+}
+.c-margin-tb-small{
+	margin-top: 0.7em !important;
+	margin-bottom: 0.7em !important;
+}
+
+.c-margin-top-small {
+	margin-top: 0.5em !important;
+}
+
+.c-margin-top {
+	margin-top: 1em !important;
+}
+
+.c-margin-top-large {
+	margin-top: 2em !important;
+}
+
+.c-margin-bottom-small{
+	margin-bottom: .5em !important;
+}
+
+/* display================================= */
+
+.c-inline-block {
+	display: inline-block;
+}
+
+/* color=================================== */
+.c-black {
+	color: #333;
+}
+
+/* 右上角菜单按钮在平时为隐藏 */
+.c-mobile-show {
+	display: none !important;
+}
+
+/* position================================ */
+.c-right-top {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.c-fixed{
+	position: fixed !important;
+	z-index: 10 !important;
+}
+.c-right-bottom{
+	bottom:10px !important;
+	right:10px !important;
+}
+
+/* container=============================== */
+.c-container{
+	max-width: 72em !important;
+	margin: auto !important;
+}
+
+.c-container-small{
+	max-width: 60em !important;
+	margin: auto !important;
+}
+/* shadow=================================== */
+.c-shadow-small{
+	-webkit-box-shadow: 0 4px 8px rgba(0,0,0,.2) !important;
+	box-shadow:  0 4px 8px rgba(0,0,0,.2) !important;
+}
+
+
+/* 媒体查询 */
+@media screen and (max-width:768px) {
+	.c-mobile-hide {
+		display: none !important;
+	}
+
+	.c-mobile-show {
+		display: block !important;
+	}
+	
+	.c-padded-lr-responsive{
+		padding-left: 0em !important;
+		padding-right: 0em !important;
+	}
+	
+	.c-padded-lr-clear{
+		padding-left: 0em !important;
+		padding-right: 0em !important;
+	}
+	
+	.c-mobile-wide{
+		width: 100% !important;
+	}
+}
+
+
+/* 自定义pop========================== */
+.c-popup{
+	position: fixed;
+	right:20px;
+	bottom:70px;
+	display: block;
+	background-color: #ffffff;
+	width:220px;
+	height: auto;
+	z-index: 99;
+	border-radius: 10px;
+	border: 1px solid #d4d4d5;
+	-webkit-box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.15);
+	box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.15);
+	padding-right: 40px;
+}
+.c-popup-hidden{
+	display: none;
+}
+ol .js-toc{
+	display: block !important;
+	height: auto !important;
+}
