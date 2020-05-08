@@ -3,6 +3,7 @@ package com.lgr.po;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -21,6 +22,7 @@ public class Type {
 //    主键ID
     private long id;
 //    分类名
+    @NotBlank(message = "分类名不能为空")
     private String name;
 
     @OneToMany(mappedBy = "type")
