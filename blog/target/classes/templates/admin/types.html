@@ -54,6 +54,13 @@
 		<!-- 分为左右布局 -->
 		<div class="c-padded-tb-big">
 			<div class="ui container">
+				<div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+					<i class="close icon"></i>
+					<div class="header">提示：</div>
+					<p th:text="${message}">消息显示</p>
+				</div>
+
+
 				<!-- 表格 -->
 				<table class="ui table">
 					<thead>
@@ -76,13 +83,9 @@
 					<tfoot>
 						<tr>
 							<th colspan="6">
-								<div class="ui pagination menu mini">
-									<a th:href="@{/admin/types(page=${page.number}-1)}" class="icon item">
-										<i class="left chevron icon"></i>
-									</a>
-									<a th:href="@{/admin/types(page=${page.number}+1)}" class="icon item">
-										<i class="right chevron icon"></i>
-									</a>
+								<div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+									<a th:unless="${page.first}" th:href="@{/admin/types(page=${page.number}-1)}" class="item">上一页</a>
+									<a th:unless="${page.last}" th:href="@{/admin/types(page=${page.number}+1)}" class="item">下一页</a>
 								</div>
 								<a href="#" th:href="@{/admin/types/input}" class="ui teal right floated button">新增分类</a>
 							</th>
@@ -141,6 +144,10 @@
 			$('.ui.dropdown').dropdown({
 				on: 'hover',
 			});
+
+			$('.message .close').on('click',function () {
+				$(this).closest('.message').transition('fade');
+			})
 		</script>
 	</body>
 </html>
