@@ -1,7 +1,6 @@
 package com.lgr.web.admin;
 
-import com.lgr.Service.UserService;
-import com.lgr.Service.impl.UserServiceImpl;
+import com.lgr.service.UserService;
 import com.lgr.po.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

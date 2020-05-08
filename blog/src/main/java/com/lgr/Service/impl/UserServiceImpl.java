@@ -1,8 +1,9 @@
-package com.lgr.Service.impl;
+package com.lgr.service.impl;
 
-import com.lgr.Dao.UserRepository;
-import com.lgr.Service.UserService;
+import com.lgr.dao.UserRepository;
+import com.lgr.service.UserService;
 import com.lgr.po.User;
+import com.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User checkUser(String username, String password) {
-        User user=userRepository.findUserByUsernameAndPassword(username,password);
+        User user=userRepository.findUserByUsernameAndPassword(username,MD5Utils.code(password));
         return user;
     }
 }

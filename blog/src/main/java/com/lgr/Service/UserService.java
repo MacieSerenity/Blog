@@ -1,4 +1,4 @@
-package com.lgr.Service;
+package com.lgr.service;
 
 import com.lgr.po.User;
 import org.springframework.stereotype.Service;

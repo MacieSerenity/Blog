@@ -61,18 +61,18 @@
 2020-04-13 12:32:10.483  INFO 5744 --- [main] com.lgr.BlogApplication             : Starting BlogApplication on LAPTOP-SG60U5TO with PID 5744 (D:\Blog\blog\target\classes started by MacieSerenity in D:\Blog\blog)
 2020-04-13 12:32:10.486  INFO 5744 --- [main] com.lgr.BlogApplication             : The following profiles are active: pro
 2020-04-13 12:32:13.441  INFO 5744 --- [main] com.lgr.BlogApplication             : Started BlogApplication in 3.409 seconds (JVM running for 4.962)
-2020-04-13 12:32:27.736  INFO 5744 --- [http-nio-8080-exec-1] com.lgr.Aspect.LogAspect                 : ----------doBefore----------
-2020-04-13 12:32:27.745  INFO 5744 --- [http-nio-8080-exec-1] com.lgr.Aspect.LogAspect                 : ----------doAfter----------
-2020-04-13 12:32:27.745  INFO 5744 --- [http-nio-8080-exec-1] com.lgr.Aspect.LogAspect                 : Result : {}id: 1,name1
-2020-04-13 12:51:59.299  INFO 5744 --- [http-nio-8080-exec-3] com.lgr.Aspect.LogAspect                 : ----------doBefore----------
-2020-04-13 12:51:59.300  INFO 5744 --- [http-nio-8080-exec-3] com.lgr.Aspect.LogAspect                 : ----------doAfter----------
-2020-04-13 12:51:59.301  INFO 5744 --- [http-nio-8080-exec-3] com.lgr.Aspect.LogAspect                 : Result : {}id: 1,name1
+2020-04-13 12:32:27.736  INFO 5744 --- [http-nio-8080-exec-1] com.lgr.aspect.LogAspect                 : ----------doBefore----------
+2020-04-13 12:32:27.745  INFO 5744 --- [http-nio-8080-exec-1] com.lgr.aspect.LogAspect                 : ----------doAfter----------
+2020-04-13 12:32:27.745  INFO 5744 --- [http-nio-8080-exec-1] com.lgr.aspect.LogAspect                 : Result : {}id: 1,name1
+2020-04-13 12:51:59.299  INFO 5744 --- [http-nio-8080-exec-3] com.lgr.aspect.LogAspect                 : ----------doBefore----------
+2020-04-13 12:51:59.300  INFO 5744 --- [http-nio-8080-exec-3] com.lgr.aspect.LogAspect                 : ----------doAfter----------
+2020-04-13 12:51:59.301  INFO 5744 --- [http-nio-8080-exec-3] com.lgr.aspect.LogAspect                 : Result : {}id: 1,name1
 2020-04-13 12:52:54.820  INFO 18428 --- [main] com.lgr.BlogApplication             : Starting BlogApplication on LAPTOP-SG60U5TO with PID 18428 (D:\Blog\blog\target\classes started by MacieSerenity in D:\Blog\blog)
 2020-04-13 12:52:54.824  INFO 18428 --- [main] com.lgr.BlogApplication             : The following profiles are active: pro
 2020-04-13 12:52:58.763  INFO 18428 --- [main] com.lgr.BlogApplication             : Started BlogApplication in 4.509 seconds (JVM running for 6.189)
-2020-04-13 12:52:59.945  INFO 18428 --- [http-nio-8080-exec-1] com.lgr.Aspect.LogAspect                 : Request:RequestLog{url='/1/1', ip='127.0.0.1', classMethod='com.lgr.web.IndexController.index', args=[1, 1]}
-2020-04-13 12:52:59.978  INFO 18428 --- [http-nio-8080-exec-1] com.lgr.Aspect.LogAspect                 : ----------doAfter----------
-2020-04-13 12:52:59.979  INFO 18428 --- [http-nio-8080-exec-1] com.lgr.Aspect.LogAspect                 : Result : {}id: 1,name1
+2020-04-13 12:52:59.945  INFO 18428 --- [http-nio-8080-exec-1] com.lgr.aspect.LogAspect                 : Request:RequestLog{url='/1/1', ip='127.0.0.1', classMethod='com.lgr.web.IndexController.index', args=[1, 1]}
+2020-04-13 12:52:59.978  INFO 18428 --- [http-nio-8080-exec-1] com.lgr.aspect.LogAspect                 : ----------doAfter----------
+2020-04-13 12:52:59.979  INFO 18428 --- [http-nio-8080-exec-1] com.lgr.aspect.LogAspect                 : Result : {}id: 1,name1
 2020-04-13 14:26:44.766  INFO 19712 --- [main] com.lgr.BlogApplication             : Starting BlogApplication on LAPTOP-SG60U5TO with PID 19712 (D:\Blog\blog\target\classes started by MacieSerenity in D:\Blog\blog)
 2020-04-13 14:26:44.770  INFO 19712 --- [main] com.lgr.BlogApplication             : The following profiles are active: pro
 2020-04-13 14:26:47.825  INFO 19712 --- [main] com.lgr.BlogApplication             : Started BlogApplication in 3.496 seconds (JVM running for 5.18)

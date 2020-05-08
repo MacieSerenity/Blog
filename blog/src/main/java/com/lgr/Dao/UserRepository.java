@@ -1,8 +1,7 @@
-package com.lgr.Dao;
+package com.lgr.dao;
 
 import com.lgr.po.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 
 /**
