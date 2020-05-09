@@ -13,13 +13,8 @@ import java.security.NoSuchAlgorithmException;
 public class MD5Utils {
 
     public static String code(String string){
-
-        System.out.println("原密码"+string);
-
         String newCode=string+"macie";
 //        在原密码后面增加一个字符来确保再简单的密码也不会被反破译
-        System.out.println("添加字符"+newCode);
-
         try {
             MessageDigest messageDigest=MessageDigest.getInstance("MD5");
             //拿到一个MD5转换器（如果想要SHA1参数换成”SHA1”）
@@ -50,9 +45,5 @@ public class MD5Utils {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(code("meiyoumima233"));
     }
 }

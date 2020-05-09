@@ -1,5 +1,7 @@
 package com.lgr.po;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
  * Description:
  * Version: V1.0
  */
+@Data
 @Entity(name = "t_tag")
 public class Tag {
 

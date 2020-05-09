@@ -44,8 +44,8 @@
 		<div class="ui attached pointing menu">
 			<div class="ui container">
 				<div class="right menu">
-					<a href="#" class="teal item active">发布</a>
-					<a href="#" class="item">列表</a>
+					<a href="#" th:href="@{/admin/types/input}" class="item teal active">新增</a>
+					<a href="#" th:href="@{/admin/types}" class="item">列表</a>
 				</div>
 			</div>
 		</div>
@@ -73,12 +73,6 @@
 								<div class="default text">分类名</div>
 							</div>
 							<input type="text" name="name" value="" th:value="*{name}" placeholder="分类名" />
-						</div>
-					</div>
-
-					<div class="field">
-						<div id="md-content" style="z-index: 9999;">
-							<textarea placeholder="博客内容" name="content" style="display: none;"></textarea>
 						</div>
 					</div>
 

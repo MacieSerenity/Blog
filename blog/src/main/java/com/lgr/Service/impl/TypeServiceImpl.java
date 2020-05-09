@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: MacieSerenity
@@ -60,8 +62,14 @@ public class TypeServiceImpl implements TypeService {
         typeRepository.deleteById(id);
     }
 
+    @Transactional
     @Override
     public Type getTypeByName(String name) {
         return typeRepository.findByName(name);
+    }
+
+    @Override
+    public List<Type> listType() {
+        return typeRepository.findAll();
     }
 }

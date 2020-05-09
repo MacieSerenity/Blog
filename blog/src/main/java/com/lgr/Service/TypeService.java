@@ -4,6 +4,8 @@ import com.lgr.po.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: MacieSerenity
@@ -25,4 +27,6 @@ public interface TypeService {
 
     Type getTypeByName(String name);
 
+    //用于返回一个所有type的list用于添加，查看，搜索分类
+    List<Type> listType();
 }

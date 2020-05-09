@@ -4,31 +4,32 @@
 		<meta charset="utf-8" />
 		<!-- 移动端预览方案 -->
 		<meta name="viewport" content="width=device-width,inital-scale=1.0" />
-		<title>博客管理首页</title>
+		<title>新增标签</title>
 		<link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
 		<!-- <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet"> -->
 		<link href="../../static/css/custom.css" rel="stylesheet" />
+		<link href="../../static/lib/editor-md/css/editormd.min.css" rel="stylesheet" />
 		<script src="../../static/js/vue.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<!-- 导航栏 -->
-		<nav th:replace="admin/_fragments :: menu(0)" class="ui inverted attached segment c-padded-tb-mini c-shadow-small">
+		<nav th:replace="admin/_fragments :: menu(3)" class="ui inverted attached segment c-padded-tb-mini c-shadow-small">
 			<div class="ui container">
 				<div class="ui inverted secondary stackable menu">
 					<h2 class="ui teal header item">后台管理页面</h2>
-					<a href="#" class="active c-item item c-mobile-hide"><i class="home icon"></i>首页</a>
+					<a href="#" class="c-item item c-mobile-hide"><i class="home icon"></i>首页</a>
 					<a href="#" class="c-item item c-mobile-hide"><i class="idea icon"></i>博客</a>
 					<a href="#" class="c-item item c-mobile-hide"><i class="tags icon"></i>标签</a>
 					<div class="right c-item c-mobile-hide menu">
 						<div class="ui dropdown item">
 							<div class="text">
-								<img src="../../static/img/gmzr/img10.jpg" th:src="@{/img/gmzr/img10.jpg}" alt="" class="ui avatar image">
+								<img src="../../static/img/gmzr/img10.jpg" alt="" class="ui avatar image">
 								MacieSerenity
 							</div>
 							<i class="dropdown icon"></i>
 							<div class="menu">
 								<a href="#" target="_blank" class="item">更改信息</a>
-								<a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+								<a href="#" th:href="@{/admin/logout}" target="_blank" class="item">注销</a>
 							</div>
 						</div>
 					</div>
@@ -39,21 +40,67 @@
 				<i class="sidebar icon"></i>
 			</a>
 		</nav>
+		<!-- 二级导航 -->
+		<div class="ui attached pointing menu">
+			<div class="ui container">
+				<div class="right menu">
+					<a href="#" th:href="@{/admin/tags/input}" class="item teal active">新增</a>
+					<a href="#" th:href="@{/admin/tags}" class="item">列表</a>
+				</div>
+			</div>
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+
 		<!-- 中间内容 -->
 		<!-- 分为左右布局 -->
 		<div class="c-padded-tb-big">
 			<div class="ui container">
-				<div class="ui success large message">
-					<h1>Hi,</h1>
-					<p>
-						${userName},欢迎登录。
-					</p>
-				</div>
-<!--				<img src="http://unsplash.it/1000/400?image=1005" alt="" class="ui rounded bordered fluid image">-->
-				<img src="../../static/img/adminLoginPhoto/login.jpg" th:src="@{/img/adminLoginPhoto/login.jpg}" alt="stu" class="ui rounded bordered fluid image">
-<!--				th:src="@{/img/wechat.jpg}"-->
+				<form action="#" method="post" th:object="${tag}" th:action="*{id}==null ? @{/admin/tags} : @{/admin/tags/{id}(id=*{id})}" class="ui form">
+					<input type="hidden" name="id" th:value="*{id}">
+					<div class="required field">
+						<div class="ui left labeled input fluid">
+							<div class="ui selection compact teal basic label">
+								<input type="hidden" name="" value="" />
+								<div class="default text">标签名</div>
+							</div>
+							<input type="text" name="name" value="" th:value="*{name}" placeholder="标签名" />
+						</div>
+					</div>
+
+					<div class="ui error message"></div>
+					<!--/*/
+						<div class="ui negative message" th:if="${#fields.hasErrors('name')}">
+							<i class="close icon"></i>
+							<div class="header">验证失败</div>
+							<p th:errors="*{name}">提交信息不符合规则</p>
+						</div>
+					/*/-->
+
+					<div class="ui right aligned container">
+						<button class="ui button" onclick="window.history.go(-1)">返回</button>
+						<button class="ui teal submit button">保存</button>
+					</div>
+				</form>
 			</div>
 		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 		<!-- 底部footer -->
 		<footer th:replace="admin/_fragments :: footer" class="ui inverted segment vertical c-padded-tb-massive">
 			<div class="ui center aligned container">
@@ -93,9 +140,9 @@
 			</div>
 		</footer>
 
-		<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-		<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
-
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js" type="text/javascript"></script>
+		<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js" type="text/javascript"></script>
+		
 		<script type="text/javascript">
 			$('.menu.toggle').click(function() {
 				$('.c-item').toggleClass('c-mobile-hide');
@@ -104,6 +151,22 @@
 			$('.ui.dropdown').dropdown({
 				on: 'hover',
 			});
+
+			$('.ui.form').form({
+				fields: {
+					name: {
+						indentifier: 'name',
+						rules: [{
+							type: 'empty',
+							prompt: '请输入分类名称'
+						}]
+					}
+				}
+			})
+
+			$('.message .close').on('click',function () {
+				$(this).closest('.message').transition('fade');
+			})
 		</script>
 	</body>
 </html>
