@@ -10,6 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -57,6 +61,29 @@ public class TagServieceImpl implements TagService {
     @Override
     public void deleteTag(Long id) {
         tagRepository.deleteById(id);
+    }
+
+    @Transactional
+    @Override
+    public List<Tag> listTag() {
+        return tagRepository.findAll();
+    }
+
+    @Transactional
+    @Override
+    public List<Tag> listTag(String ids) {
+        return tagRepository.findAllById(converToList(ids));
+    }
+
+    private List<Long> converToList(String ids){
+        List<Long> list=new ArrayList<>();
+        if ("".equals(ids) && ids!=null){
+            String[] array = ids.split(",");
+            for (int i=0;i<ids.length();i++){
+                list.add(new Long(array[i]));
+            }
+        }
+        return list;
     }
 
     @Transactional

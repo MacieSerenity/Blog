@@ -23,7 +23,10 @@ public class Blog {
     private Long id;
     //    标题
     private String title;
+
     //    内容
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
     private String content;
     //    首图
     private String firstPicture;
@@ -36,7 +39,7 @@ public class Blog {
     //    版权
     private boolean shareStatement;
     //    评论
-    private boolean commenttabled;
+    private boolean commentabled;
     //    公开/发布
     private boolean published;
     //    是否推荐
@@ -52,6 +55,7 @@ public class Blog {
 
     @ManyToOne
     private Type type;
+
 //    级联新增，新增一个带tag的blog时，也会在blog那边新增一个标签
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Tag> taglist = new ArrayList<>();
@@ -61,5 +65,8 @@ public class Blog {
 
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments=new ArrayList<>();
+
+    @Transient
+    private String tags;
 
 }
