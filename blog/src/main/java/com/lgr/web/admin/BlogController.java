@@ -14,6 +14,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -50,7 +51,7 @@ public class BlogController {
 
 //    这个是查询整个页面的
     @GetMapping("/blogs")
-    public String blog(@PageableDefault(size = 3,sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blogQuery, Model model){
+    public String blog(@PageableDefault(size = 10,sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blogQuery, Model model){
         //返回一个type类型的数据
         model.addAttribute("types",typeService.listType());
         model.addAttribute("page",blogService.listBlog(pageable,blogQuery));
@@ -60,7 +61,7 @@ public class BlogController {
 
 //    局部搜索，局部查询,返回blogManage里面的一个blogList片段
     @PostMapping("/blogs/search")
-    public String search(@PageableDefault(size = 3,sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blogQuery, Model model){
+    public String search(@PageableDefault(size = 10,sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blogQuery, Model model){
         model.addAttribute("page",blogService.listBlog(pageable,blogQuery));
         return "/admin/blogManage :: blogList";
     }
@@ -68,8 +69,7 @@ public class BlogController {
 
     @GetMapping("/blogs/input")
     public String input(Model model){
-        model.addAttribute("types",typeService.listType());
-        model.addAttribute("tags",tagService.listTag());
+        setTypeAndTag(model);
         model.addAttribute("blog",new Blog());
         return INPUT;
     }
@@ -80,8 +80,8 @@ public class BlogController {
         blog.setUser((User) httpSession.getAttribute("user"));
         blog.setType(typeService.getType(blog.getType().getId()));
         blog.setTaglist(tagService.listTag(blog.getTags()));
-        Blog blog1=blogService.saveBlog(blog);
 
+        Blog blog1=blogService.saveBlog(blog);
         if (blog1==null){
             attributes.addFlashAttribute("message","操作失败");
         }else {
@@ -91,6 +91,19 @@ public class BlogController {
         return REDIRECT_LIST;
     }
 
+    @GetMapping("/blogs/{id}/input")
+    public String editBlog(@PathVariable Long id, Model model){
+        setTypeAndTag(model);
+        Blog blog=blogService.getBlog(id);
+        blog.init();
+        System.out.println(blog.getTags());
+        model.addAttribute("blog",blog);
+        return INPUT;
+    }
 
+    private void setTypeAndTag(Model model){
+        model.addAttribute("tags",tagService.listTag());
+        model.addAttribute("type",typeService.listType());
+    }
 
 }

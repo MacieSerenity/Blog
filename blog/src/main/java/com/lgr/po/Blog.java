@@ -30,7 +30,7 @@ public class Blog {
     private String content;
     //    首图
     private String firstPicture;
-    //    标签
+    //    转载类型
     private String flag;
     //    浏览次数
     private Integer views;
@@ -57,6 +57,7 @@ public class Blog {
     private Type type;
 
 //    级联新增，新增一个带tag的blog时，也会在blog那边新增一个标签
+//    --tags
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Tag> taglist = new ArrayList<>();
 
@@ -66,7 +67,30 @@ public class Blog {
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments=new ArrayList<>();
 
+//    --tagIds
     @Transient
     private String tags;
+
+    public void init(){
+        this.tags=tagsToIds(this.taglist);
+    }
+
+    private String tagsToIds(List<Tag> taglist){
+        if (!taglist.isEmpty()){
+            StringBuffer ids= new StringBuffer();
+            boolean flag=false;
+            for (Tag tag:taglist){
+                if (flag){
+                    ids.append(",");
+                }else {
+                    flag=true;
+                }
+                ids.append(tag.getId());
+            }
+            return ids.toString();
+        }else {
+            return this.tags;
+        }
+    }
 
 }
