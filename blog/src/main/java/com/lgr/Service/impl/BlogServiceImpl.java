@@ -6,6 +6,7 @@ import com.lgr.po.Blog;
 import com.lgr.po.Type;
 import com.lgr.service.BlogService;
 import com.lgr.vo.BlogQuery;
+import com.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -104,7 +105,12 @@ public class BlogServiceImpl implements BlogService {
         if (tempBlog==null){
             throw new NotFoundException("没有找到这篇博客");
         }
-        BeanUtils.copyProperties(blog,tempBlog);
+
+        /**
+         * MyBeanUtils.getNullPropertyNames 将null值分离出来
+         */
+        BeanUtils.copyProperties(blog,tempBlog, MyBeanUtils.getNullPropertyNames(blog));
+        tempBlog.setUpdateTime(new Date());
         return blogRepository.save(tempBlog);
     }
 

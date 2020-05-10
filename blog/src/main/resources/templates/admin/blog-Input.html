@@ -115,6 +115,10 @@
 				</div>
 			</div>
 
+			<div class="required field">
+				<textarea name="description" th:text="*{description}" placeholder="对博客的描述" maxlength="200"></textarea>
+			</div>
+
 			<div class="inline fields">
 				<div class="field">
 					<div class="ui checkbox">
@@ -215,6 +219,8 @@
 		on: 'hover',
 	});
 
+	$('.ui.dropdown').dropdown('set selected','原创')
+
 	$('.ui.form').form({
 		fields: {
 			title: {
@@ -243,6 +249,13 @@
 				rules: [{
 					type: 'empty',
 					prompt: '请输入首图地址'
+				}]
+			},
+			description: {
+				indentifier: 'description',
+				rules: [{
+					type: 'empty',
+					prompt: '请输入文章描述'
 				}]
 			}
 		}

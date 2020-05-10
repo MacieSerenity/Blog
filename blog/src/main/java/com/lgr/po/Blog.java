@@ -28,6 +28,10 @@ public class Blog {
     @Basic(fetch = FetchType.LAZY)
     @Lob
     private String content;
+
+//    描述//
+    private String description;
+
     //    首图
     private String firstPicture;
     //    转载类型
