@@ -102,6 +102,7 @@ public class TagController {
                             RedirectAttributes attributes
                             ){
         tagService.deleteTag(id);
+        attributes.addFlashAttribute("message","操作成功");
         return "redirect:/admin/tags";
     }
 

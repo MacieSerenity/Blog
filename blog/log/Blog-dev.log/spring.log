@@ -19610,3 +19610,30 @@ java.lang.ArrayIndexOutOfBoundsException: 2
 2020-05-10 20:02:47.636  INFO 7292 --- [RMI TCP Connection(3)-192.168.1.107] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2020-05-10 20:02:47.637  INFO 7292 --- [RMI TCP Connection(3)-192.168.1.107] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2020-05-10 20:02:47.646  INFO 7292 --- [RMI TCP Connection(3)-192.168.1.107] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2020-05-10 20:39:19.411  INFO 22200 --- [main] com.lgr.BlogApplication                  : Starting BlogApplication on LAPTOP-SG60U5TO with PID 22200 (D:\Blog\blog\target\classes started by MacieSerenity in D:\Blog\blog)
+2020-05-10 20:39:19.414 DEBUG 22200 --- [main] com.lgr.BlogApplication                  : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-10 20:39:19.416  INFO 22200 --- [main] com.lgr.BlogApplication                  : The following profiles are active: dev
+2020-05-10 20:39:22.515  INFO 22200 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-05-10 20:39:22.594  INFO 22200 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 69ms. Found 4 JPA repository interfaces.
+2020-05-10 20:39:23.805  INFO 22200 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-05-10 20:39:23.817  INFO 22200 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-10 20:39:23.818  INFO 22200 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-10 20:39:23.974  INFO 22200 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-10 20:39:23.975  INFO 22200 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4476 ms
+2020-05-10 20:39:24.627  INFO 22200 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-05-10 20:39:24.714  INFO 22200 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.12.Final
+2020-05-10 20:39:24.865  INFO 22200 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-05-10 20:39:24.993  INFO 22200 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-05-10 20:39:25.913  INFO 22200 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-05-10 20:39:25.929  INFO 22200 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2020-05-10 20:39:27.600  INFO 22200 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-05-10 20:39:27.608  INFO 22200 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-05-10 20:39:28.289  WARN 22200 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-05-10 20:39:28.463  INFO 22200 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-10 20:39:28.543  INFO 22200 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-10 20:39:28.980  INFO 22200 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2020-05-10 20:39:29.068  INFO 22200 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-05-10 20:39:29.069  INFO 22200 --- [main] com.lgr.BlogApplication                  : Started BlogApplication in 10.133 seconds (JVM running for 12.167)
+2020-05-10 20:39:30.760  INFO 22200 --- [RMI TCP Connection(2)-192.168.1.107] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-10 20:39:30.761  INFO 22200 --- [RMI TCP Connection(2)-192.168.1.107] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-10 20:39:30.780  INFO 22200 --- [RMI TCP Connection(2)-192.168.1.107] o.s.web.servlet.DispatcherServlet        : Completed initialization in 19 ms
