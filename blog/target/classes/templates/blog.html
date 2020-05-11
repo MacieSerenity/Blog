@@ -1,384 +1,444 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-	<head th:replace="_fragments :: head(~{::title})">
-		<meta charset="utf-8" />
-		<!-- 移动端预览方案 -->
-		<meta name="viewport" content="width=device-width,inital-scale=1.0" />
-		<title>博客</title>
-		<link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
-		<!-- <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet"> -->
-		<link href="../static/css/custom.css" rel="stylesheet" />
-		<link href="../static/css/typo.css" rel="stylesheet" />
-		<link href="../static/css/animate.css" rel="stylesheet" />
-		<link href="../static/lib/prism/prism.css" rel="stylesheet" />
-		<link href="../static/lib/tocBot/tocbot.css" rel="stylesheet" />
-		<script src="../static/js/vue.js" type="text/javascript" charset="utf-8"></script>
-	</head>
-	<body>
-		<!-- 导航栏 -->
-		<nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment c-padded-tb-mini c-shadow-small">
-			<div class="ui container">
-				<div class="ui inverted secondary stackable menu">
-					<h2 class="ui teal header item">Blog</h2>
-					<a href="#" class="c-item item c-mobile-hide"><i class="home icon"></i>首页</a>
-					<a href="#" class="c-item item c-mobile-hide"><i class="idea icon"></i>分类</a>
-					<a href="#" class="c-item item c-mobile-hide"><i class="tags icon"></i>标签</a>
-					<a href="#" class="c-item item c-mobile-hide"><i class="clone icon"></i>归档</a>
-					<a href="#" class="c-item item c-mobile-hide"><i class="info icon"></i>关于我</a>
-					<div class="right c-item item c-mobile-hide">
-						<div class="ui icon inverted transparent input">
-							<input type="text" name="" id="" value="" placeholder="搜索....." />
-							<i class="search link icon"></i>
+<head th:replace="_fragments :: head(~{::title})">
+	<meta charset="utf-8" />
+	<!-- 移动端预览方案 -->
+	<meta name="viewport" content="width=device-width,inital-scale=1.0" />
+	<title>博客</title>
+	<link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+	<!-- <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet"> -->
+	<link href="../static/css/custom.css" rel="stylesheet" />
+	<link href="../static/css/typo.css" rel="stylesheet" />
+	<link href="../static/css/animate.css" rel="stylesheet" />
+	<link href="../static/lib/prism/prism.css" rel="stylesheet" />
+	<link href="../static/lib/tocBot/tocbot.css" rel="stylesheet" />
+	<script src="../static/js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<!-- 导航栏 -->
+<nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment c-padded-tb-mini c-shadow-small">
+	<div class="ui container">
+		<div class="ui inverted secondary stackable menu">
+			<h2 class="ui teal header item">Blog</h2>
+			<a href="#" class="c-item item c-mobile-hide"><i class="home icon"></i>首页</a>
+			<a href="#" class="c-item item c-mobile-hide"><i class="idea icon"></i>分类</a>
+			<a href="#" class="c-item item c-mobile-hide"><i class="tags icon"></i>标签</a>
+			<a href="#" class="c-item item c-mobile-hide"><i class="clone icon"></i>归档</a>
+			<a href="#" class="c-item item c-mobile-hide"><i class="info icon"></i>关于我</a>
+			<div class="right c-item item c-mobile-hide">
+				<div class="ui icon inverted transparent input">
+					<input type="text" name="" id="" value="" placeholder="搜索....." />
+					<i class="search link icon"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 手机端按钮 -->
+	<a href="#" class="ui icon black c-right-top c-mobile-show button menu toggle">
+		<i class="sidebar icon"></i>
+	</a>
+</nav>
+
+
+<!-- 中间内容 -->
+<!-- 分为左右布局 -->
+<div id="waypoint-item" class="c-padded-tb-big animated fadeIn">
+	<div class="ui container">
+		<!-- 用户信息区域 -->
+		<div class="ui segment top attached">
+			<div class="ui link list horizontal">
+				<div class="item">
+					<img th:src="@{${blog.user.avatar}}" src="https://unsplash.it/100/100?image=1005" alt="" class="ui avatar image">
+					<div class="content">
+						<a th:text="${blog.user.nickname}" href="#" target="_blank" class="header">MacieSerenity</a>
+					</div>
+				</div>
+				<div class="item">
+					<i class="calendar icon"></i>
+					<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}"></span>
+				</div>
+				<div class="item">
+					<i class="eye icon">
+					</i><span th:text="${blog.views}"></span>
+				</div>
+			</div>
+		</div>
+
+		<!-- 图片区域 -->
+		<div class="ui segment attached">
+			<img th:src="@{${blog.firstPicture}}" src="https://unsplash.it/850/450?image=1005" alt="" class="ui rounded image fluid" wid>
+		</div>
+
+		<!-- 主要内容区域 -->
+		<div class="ui segment attached">
+			<!-- 文章类型 -->
+			<div class="ui right aligned basic segment">
+				<div class="ui label basic orange" th:text="${blog.flag}">原创</div>
+			</div>
+			<!-- 标题 -->
+			<h2 class="ui center aligned header" th:text="${blog.title}" id="header">暂时没有什么好写的</h2>
+
+
+			<!-- 内容 -->
+			<div id="content" class="typo js-toc-content typo-selection c-padded-lr-responsive c-padded-tb-large" th:utext="${blog.content}">
+
+			</div>
+
+
+			<!-- 标签 -->
+			<div class="c-padded-lr-responsive">
+				<div class="ui basic teal left pointing label" th:each="tag:${blog.taglist}" th:text="${tag.name}">
+					标签
+				</div>
+			</div>
+			<!-- 赞赏 -->
+			<div class="ui segment center aligned basic">
+				<button id="reward" class="ui orange basic circular button">赞赏</button>
+			</div>
+			<!-- 打赏的二维码 -->
+			<div class="ui rewardPic flowing popup transition hidden">
+				<div class="ui orange basic label">
+					<div class="ui images" style="font-size: inherit;">
+						<div class="image">
+							<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" alt="" class="ui rounded bordered image" style="width: 120px;">
+							<div>支付宝</div>
+						</div>
+						<div class="image">
+							<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" alt="" class="ui rounded bordered image" style="width: 120px;">
+							<div>微信</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- 手机端按钮 -->
-			<a href="#" class="ui icon black c-right-top c-mobile-show button menu toggle">
-				<i class="sidebar icon"></i>
-			</a>
-		</nav>
+		</div>
 
 
-		<!-- 中间内容 -->
-		<!-- 分为左右布局 -->
-		<div id="waypoint-item" class="c-padded-tb-big animated fadeIn">
-			<div class="ui container">
-				<!-- 用户信息区域 -->
-				<div class="ui segment top attached">
-					<div class="ui link list horizontal">
-						<div class="item">
-							<img th:src="@{${blog.user.avatar}}" src="https://unsplash.it/100/100?image=1005" alt="" class="ui avatar image">
+		<!-- 博客信息说明区域 -->
+		<div class="ui message positive attached">
+			<div class="ui middle aligned grid">
+				<!-- 信息左边文字说明 -->
+				<div class="eleven wide column">
+					<ui class="list">
+						<li>作者：<span th:text="${blog.user.nickname}">MacieSerenity</span>
+							<a href="#" th:href="@{/about}" target="_blank">
+								联系作者
+							</a>
+						</li>
+						<li>发布时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2020年4月6日18:00:51</span></li>
+						<li>声明：文章若注明非原创，均为转载或整理互联网资源</li>
+						<li>公众号转载：诶，公众号还没建呢</li>
+					</ui>
+				</div>
+				<!-- 信息右边图片 -->
+				<div class="five wide column">
+					<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" style="width: 110px;" alt="" class="ui right floated rounded bordered image">
+				</div>
+			</div>
+		</div>
+
+		<!-- 评论区 -->
+		<div class="ui segment bottom attached ">
+			<!-- 留言列表 -->
+			<div class="ui teal segment"  id="comment-container">
+				<div th:fragment="commentList">
+					<div class="ui comments" style="max-width: 100%">
+						<h3 class="ui dividing header">评论</h3>
+<!--						评论1					-->
+						<div class="comment" th:each="comment:${comments}">
+							<a class="avatar">
+								<img src="../static/img/gmzr/img10.jpg" th:src="@{${comment.avatar}}">
+							</a>
 							<div class="content">
-								<a th:text="${blog.user.nickname}" href="#" target="_blank" class="header">MacieSerenity</a>
-							</div>
-						</div>
-						<div class="item">
-							<i class="calendar icon"></i>
-							<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}"></span>
-						</div>
-						<div class="item">
-							<i class="eye icon">
-							</i><span th:text="${blog.views}"></span>
-						</div>
-					</div>
-				</div>
-
-				<!-- 图片区域 -->
-				<div class="ui segment attached">
-					<img th:src="@{${blog.firstPicture}}" src="https://unsplash.it/1000/1000?image=1005" alt="" class="ui rounded image fluid" wid>
-				</div>
-
-				<!-- 主要内容区域 -->
-				<div class="ui segment attached">
-					<!-- 文章类型 -->
-					<div class="ui right aligned basic segment">
-						<div class="ui label basic orange" th:text="${blog.flag}">原创</div>
-					</div>
-					<!-- 标题 -->
-					<h2 class="ui center aligned header" th:text="${blog.title}" id="header">暂时没有什么好写的</h2>
-
-
-					<!-- 内容 -->
-					<div id="content" class="typo js-toc-content typo-selection c-padded-lr-responsive c-padded-tb-large" th:utext="${blog.content}">
-
-					</div>
-
-
-					<!-- 标签 -->
-					<div class="c-padded-lr-responsive">
-						<div class="ui basic teal left pointing label" th:each="tag:${blog.taglist}" th:text="${tag.name}">
-							标签
-						</div>
-					</div>
-					<!-- 赞赏 -->
-					<div class="ui segment center aligned basic">
-						<button id="reward" class="ui orange basic circular button">赞赏</button>
-					</div>
-					<!-- 打赏的二维码 -->
-					<div class="ui rewardPic flowing popup transition hidden">
-						<div class="ui orange basic label">
-							<div class="ui images" style="font-size: inherit;">
-								<div class="image">
-									<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" alt="" class="ui rounded bordered image" style="width: 120px;">
-									<div>支付宝</div>
+								<a class="author">
+									<span th:text="${comment.nickname}">UserName</span>
+									<div class="ui mini basic teal left pointing label c-padded-mini" th:if="${comment.isAdmin}">博主</div>
+								</a>
+								<div class="metadata">
+									<span class="date" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
 								</div>
-								<div class="image">
-									<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" alt="" class="ui rounded bordered image" style="width: 120px;">
-									<div>微信</div>
+								<div class="text" th:text="${comment.content}">
+									How artistic!
+								</div>
+								<div class="actions">
+									<a class="reply" data-commentid="1" data-commentnickname="Matt"
+									   th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}"
+									   onclick="reply(this)">回复</a>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- 博客信息说明区域 -->
-				<div class="ui message positive attached">
-					<div class="ui middle aligned grid">
-						<!-- 信息左边文字说明 -->
-						<div class="eleven wide column">
-							<ui class="list">
-								<li>作者：<span th:text="${blog.user.nickname}">MacieSerenity</span>
-									<a href="#" th:href="@{/about}" target="_blank">
-										联系作者
+<!--							子集回复-->
+							<div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
+								<div class="comment" th:each="reply:${comment.replyComments}">
+									<a class="avatar">
+										<img src="../static/img/gmzr/img10.jpg" th:src="@{${reply.avatar}}">
 									</a>
-								</li>
-								<li>发布时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2020年4月6日18:00:51</span></li>
-								<li>声明：文章若注明非原创，均为转载或整理互联网资源</li>
-								<li>公众号转载：诶，公众号还没建呢</li>
-							</ui>
-						</div>
-						<!-- 信息右边图片 -->
-						<div class="five wide column">
-							<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" style="width: 110px;" alt="" class="ui right floated rounded bordered image">
-						</div>
-					</div>
-				</div>
-
-				<!-- 评论区 -->
-				<div class="ui segment bottom attached " id="comment-container">
-					<!-- 留言列表 -->
-					<div class="ui teal segment">
-						<div class="ui comments">
-							<h3 class="ui dividing header">Comments</h3>
-							<div class="comment">
-								<a class="avatar">
-									<img src="../static/img/gmzr/img10.jpg">
-								</a>
-								<div class="content">
-									<a class="author">Matt</a>
-									<div class="metadata">
-										<span class="date">Today at 5:42PM</span>
-									</div>
-									<div class="text">
-										How artistic!
-									</div>
-									<div class="actions">
-										<a class="reply">回复</a>
-									</div>
-								</div>
-							</div>
-							<div class="comment">
-								<a class="avatar">
-									<img src="../static/img/gmzr/img1.jpg">
-								</a>
-								<div class="content">
-									<a class="author">Elliot Fu</a>
-									<div class="metadata">
-										<span class="date">Yesterday at 12:30AM</span>
-									</div>
-									<div class="text">
-										<p>This has been very useful for my research. Thanks as well!</p>
-									</div>
-									<div class="actions">
-										<a class="reply">回复</a>
-									</div>
-								</div>
-								<div class="comments">
-									<div class="comment">
-										<a class="avatar">
-											<img src="../static/img/gmzr/img12.jpg">
+									<div class="content">
+										<a class="author">
+											<span th:text="${reply.nickname}">Matt</span>
+											<div class="ui mini basic teal left pointing label c-padded-mini" th:if="${reply.isAdmin}">博主</div>
+											<span th:text="|@ ${reply.parentComment.nickname}|" class="m-teal">@xxx</span>
 										</a>
-										<div class="content">
-											<a class="author">Jenny Hess</a>
-											<div class="metadata">
-												<span class="date">Just now</span>
-											</div>
-											<div class="text">
-												Elliot you are always so right :)
-											</div>
-											<div class="actions">
-												<a class="reply">回复</a>
-											</div>
+										<div class="metadata">
+											<span class="date" th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+										</div>
+										<div class="text" th:text="${reply.content}">
+											How artistic!
+										</div>
+										<div class="actions">
+											<a class="reply" data-commentid="1" data-commentnickname="Matt"
+											   th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}"
+											   onclick="reply(this)">回复</a>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="comment">
-								<a class="avatar">
-									<img src="../static/img/gmzr/img3.jpg">
-								</a>
-								<div class="content">
-									<a class="author">Joe Henderson</a>
-									<div class="metadata">
-										<span class="date">5 days ago</span>
-									</div>
-									<div class="text">
-										Dude, this is awesome. Thanks so much
-									</div>
-									<div class="actions">
-										<a class="reply">回复</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="ui form">
-						<div class="field">
-							<textarea name="content" placeholder="请输入评论信息..."></textarea>
-						</div>
-						<div class="fields">
-							<div class="field c-mobile-wide c-margin-bottom-small">
-								<div class="ui left icon input">
-									<i class="user icon"></i>
-									<input type="text" name="nickname" placeholder="姓名">
-								</div>
-							</div>
-							<div class="field c-mobile-wide c-margin-bottom-small">
-								<div class="ui left icon input">
-									<i class="mail icon"></i>
-									<input type="text" name="email" placeholder="邮箱">
-								</div>
-							</div>
-							<div class="field c-mobile-wide c-margin-bottom-small">
-								<button class="ui teal button c-mobile-wide">
-									<i class="send icon"></i>
-									发布
-								</button>
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<div id="toolbar" class="c-fixed c-right-bottom c-padded" style="display: none;">
-			<div class="ui vertical icon buttons">
-				<button type="button" class="ui teal toc-btn button">
-					<i class="book icon"></i>目录</button>
-				<button id="comment-btn" class="ui teal button">
-					<i class="talk icon"></i>
-					留言</button>
-				<button type="button" class="ui wechat icon button"><i class="weixin icon"></i></button>
-				<button id="to-top-Btn" class="ui icon button"><i class="chevron up icon"></i></button>
+			<div class="ui form" id="comment-form">
+				<input type="hidden" name="blog.id" th:value="${blog.id}">
+				<input type="hidden" name="parentComment.id" value="-1">
+				<div class="field">
+					<textarea name="content" placeholder="请输入评论信息..."></textarea>
+				</div>
+				<div class="fields">
+					<div class="field c-mobile-wide c-margin-bottom-small">
+						<div class="ui left icon input">
+							<i class="user icon"></i>
+							<input type="text" name="nickname" th:value="${session.user}!=null ? ${session.user.nickname}" placeholder="姓名">
+						</div>
+					</div>
+					<div class="field c-mobile-wide c-margin-bottom-small">
+						<div class="ui left icon input">
+							<i class="mail icon"></i>
+							<input type="email" name="email" th:value="${session.user}!=null ? ${session.user.email}" placeholder="邮箱">
+						</div>
+					</div>
+					<div class="field c-mobile-wide c-margin-bottom-small">
+						<button type="button" id="comment-sub" class="ui teal button c-mobile-wide">
+							<i class="send icon"></i>
+							发布
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
+	</div>
+</div>
 
-		<!-- 目录 -->
-		<!-- <div class="c-popup c-popup-hidden animated fadeInRight">
-			<ol class="js-toc">
+<div id="toolbar" class="c-fixed c-right-bottom c-padded" style="display: none;">
+	<div class="ui vertical icon buttons">
+		<button type="button" class="ui teal toc-btn button">
+			<i class="book icon"></i>
+			目录
+		</button>
+		<a href="#comment-container" id="comment-btn" class="ui teal button">
+			<i class="talk icon"></i>
+			留言
+		</a>
+		<button type="button" class="ui wechat icon button"><i class="weixin icon"></i></button>
+		<button id="to-top-Btn" class="ui icon button"><i class="chevron up icon"></i></button>
+	</div>
+</div>
 
-			</ol>
-		</div> -->
-		<div class="ui toc-container flowing popup transition hidden" style="padding-right: 40px;width: 280px;overflow: hidden;">
-			<ol class="js-toc">
+<!-- 目录 -->
+<!-- <div class="c-popup c-popup-hidden animated fadeInRight">
+    <ol class="js-toc">
 
-			</ol>
-		</div>
+    </ol>
+</div> -->
+<div class="ui toc-container flowing popup transition hidden" style="padding-right: 40px;width: 280px;overflow: hidden;">
+	<ol class="js-toc">
 
-		<!-- 微信的二维码 -->
-		<div id="wechatQRbt" class="ui wechatQRbt flowing popup transition hidden" data-position="left center">
-		</div>
+	</ol>
+</div>
+
+<!-- 微信的二维码 -->
+<div id="wechatQRbt" class="ui wechatQRbt flowing popup transition hidden" data-position="left center">
+</div>
 
 
-		<!-- 底部footer -->
-		<footer th:replace="_fragments :: footer" class="ui inverted segment vertical c-padded-tb-massive">
-			<div class="ui center aligned container">
-				<ui class="ui inverted divided grid stackable">
-					<div class="three wide column">
-						<div class="ui inverted link list">
-							<div class="item">
-								<img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 130px;">
-							</div>
-						</div>
+<!-- 底部footer -->
+<footer th:replace="_fragments :: footer" class="ui inverted segment vertical c-padded-tb-massive">
+	<div class="ui center aligned container">
+		<ui class="ui inverted divided grid stackable">
+			<div class="three wide column">
+				<div class="ui inverted link list">
+					<div class="item">
+						<img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 130px;">
 					</div>
-					<div class="three wide column">
-						<h4 class="ui inverted header">最新文章</h4>
-						<div class="ui inverted link list">
-							<a href="#" class="item">item1</a>
-							<a href="#" class="item">item2</a>
-							<a href="#" class="item">item3</a>
-						</div>
-					</div>
-					<div class="three wide column">
-						<h4 class="ui inverted header">联系我</h4>
-						<div class="ui inverted link list">
-							<a href="#" class="item">rad1sh_rush@qq.com</a>
-							<a href="#" class="item">QQ:1594425336</a>
-						</div>
-					</div>
-					<div class="seven wide column">
-						<h4 class="ui inverted header">MacieSerenity</h4>
-						<p class="c-text-lined c-text-thin c-text-spaced">欢迎来到我的博客，希望我的内容能对你有帮助</p>
-						<p class="c-text-lined c-text-thin c-text-spaced">welcome to my blog. hope u can find help here</p>
-					</div>
-				</ui>
-				<!-- 分割线 -->
-				<div class="ui inverted section divider"></div>
-				<p class="c-text-lined c-opacity-tiny c-text-thin c-text-spaced">@Copyright什么什么的</p>
+				</div>
 			</div>
-		</footer>
+			<div class="three wide column">
+				<h4 class="ui inverted header">最新文章</h4>
+				<div class="ui inverted link list">
+					<a href="#" class="item">item1</a>
+					<a href="#" class="item">item2</a>
+					<a href="#" class="item">item3</a>
+				</div>
+			</div>
+			<div class="three wide column">
+				<h4 class="ui inverted header">联系我</h4>
+				<div class="ui inverted link list">
+					<a href="#" class="item">rad1sh_rush@qq.com</a>
+					<a href="#" class="item">QQ:1594425336</a>
+				</div>
+			</div>
+			<div class="seven wide column">
+				<h4 class="ui inverted header">MacieSerenity</h4>
+				<p class="c-text-lined c-text-thin c-text-spaced">欢迎来到我的博客，希望我的内容能对你有帮助</p>
+				<p class="c-text-lined c-text-thin c-text-spaced">welcome to my blog. hope u can find help here</p>
+			</div>
+		</ui>
+		<!-- 分割线 -->
+		<div class="ui inverted section divider"></div>
+		<p class="c-text-lined c-opacity-tiny c-text-thin c-text-spaced">@Copyright什么什么的</p>
+	</div>
+</footer>
 
-		<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-		<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
 
-		<script src="../static/lib/prism/prism.js" type="text/jscript"></script>
-		<script src="../static/lib/tocBot/tocbot.min.js" type="text/jscript"></script>
-		<script src="../static/lib/qrcode/qrcode.min.js" type="text/javascript"></script>
-		<script src="../static/lib/waypoints/jquery.waypoints.min.js" type="text/javascript"></script>
+<script src="../static/lib/prism/prism.js" type="text/jscript" th:src="@{/lib/prism/prism.js}"></script>
+<script src="../static/lib/tocBot/tocbot.min.js" type="text/jscript" th:src="@{/lib/tocBot/tocbot.min.js}"></script>
+<script src="../static/lib/qrcode/qrcode.min.js" type="text/javascript" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+<script src="../static/lib/waypoints/jquery.waypoints.min.js" type="text/javascript" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
 
-		<script type="text/javascript" th:inline="javascript">
-			$('.menu.toggle').click(function() {
-				$('.c-item').toggleClass('c-mobile-hide');
-			});
+<script type="text/javascript" th:inline="javascript">
+	// 提交时进行表单验证
+	$("#comment-sub").click(function () {
+		var boo=$('#comment-form').form('validate form',$('#comment-form'));
+		if (boo){
+			console.log("验证成功");
+			postData();
+		}else {
+			console.log("验证失败");
+		}
+	});
 
-			// 打赏按钮
-			$('#reward').popup({
-				popup: $('.rewardPic.popup'),
-				on: 'click',
-				position: 'bottom center'
-			});
+	// 提交回复数据
+	function postData(){
+		$("#comment-container").load(/*[[@{/comments}]]*/"",{
+			"parentComment.id":$("[name='parentComment.id']").val(),
+			"blog.id":$("[name='blog.id']").val(),
+			"nickname":$("[name='nickname']").val(),
+			"email":$("[name='email']").val(),
+			"content":$("[name='content']").val()
+		},function (responseTxt,statusTxt,xmlHttpRequest) {
+			// $(window).scrollTo($("#comment-container"),500);
+			clearContent();
+		});
+	}
 
-			//目录			
-			tocbot.init({
-				tocSelector: '.js-toc',
-				contentSelector: '.js-toc-content',
-				headingSelector: 'h1, h2, h3',
-			});
-			tocbot.refresh();
+	// 提交后清空content
+	function clearContent(){
+		$("[name='content']").val("");
+		$("[name='parentComment.id']").val(-1);
+		$("[name='content']").attr("placeholder","请输入评论信息");
+	}
 
-			// 微信
-			$('.wechat.button').popup({
-				popup: $('.wechatQRbt.popup'),
-			});
+	// 获取回复信息
+	function reply(object){
+		var commentid=$(object).data("commentid");
+		var nickname=$(object).data("commentnickname");
+		$("[name='content']").attr("placeholder","@"+nickname).focus();
+		$("[name='parentComment.id']").val(commentid);
+		$(window).scrollTo($("#comment-form"),500);
+	}
 
-			//目录按钮
-			$('.toc-btn').popup({
-				popup: $('.toc-container'),
-				on: 'click',
-			});
+	// 加载完成之后，立即刷新评论栏
+	$(function () {
+		$("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"");
+	})
 
-			// 二维码自动生成
-			var serurl="localhost:8080";
-			var url=/*[[@{/blog/{id}(id=${blog.id})}]]*/"";
-			var qrcode = new QRCode("wechatQRbt", {
-				text: serurl+url,
-				width: 128,
-				height: 128,
-				colorDark: "#000000",
-				colorLight: "#ffffff",
-				correctLevel: QRCode.CorrectLevel.H
-			});
+	// 手机端按钮
+	$('.menu.toggle').click(function() {
+		$('.c-item').toggleClass('c-mobile-hide');
+	});
+
+	// 打赏按钮
+	$('#reward').popup({
+		popup: $('.rewardPic.popup'),
+		on: 'click',
+		position: 'bottom center'
+	});
+
+	//目录
+	tocbot.init({
+		tocSelector: '.js-toc',
+		contentSelector: '.js-toc-content',
+		headingSelector: 'h1, h2, h3',
+	});
+	tocbot.refresh();
+
+	// 微信
+	$('.wechat.button').popup({
+		popup: $('.wechatQRbt.popup'),
+	});
+
+	//目录按钮
+	$('.toc-btn').popup({
+		popup: $('.toc-container'),
+		on: 'click',
+	});
+
+	// 二维码自动生成
+	var serurl="localhost:8080";
+	var url=/*[[@{/blog/{id}(id=${blog.id})}]]*/"";
+	var qrcode = new QRCode("wechatQRbt", {
+		text: serurl+url,
+		width: 128,
+		height: 128,
+		colorDark: "#000000",
+		colorLight: "#ffffff",
+		correctLevel: QRCode.CorrectLevel.H
+	});
+
+	// semantic UI 表单验证
+	$('.ui.form').form({
+		fields: {
+			content: {
+				indentifier: 'content',
+				rules: [{
+					type: 'empty',
+					prompt: '请输入回复内容'
+				}]
+			},
+			nickname: {
+				indentifier: 'nickname',
+				rules: [{
+					type: 'empty',
+					prompt: '请输入昵称'
+				}]
+			},
+			email: {
+				indentifier: 'email',
+				rules: [{
+					type: 'empty',
+					prompt: '请输入正确的邮箱地址'
+				}]
+			}
+		}
+	})
 
 
+	// 平滑滚动
+	$('#to-top-Btn').click(function() {
+		$(window).scrollTo(0, 500);
+	})
+	$('#comment-btn').click(function() {
+		$(window).scrollTo($('#comment-container'), 500)
+	})
 
-			// 平滑滚动
-			$('#to-top-Btn').click(function() {
-				$(window).scrollTo(0, 500);
-			})
-			$('#comment-btn').click(function() {
-				$(window).scrollTo($('#comment-container'), 500)
-			})
-
-			// 滚动侦听
-			var waypoint = new Waypoint({
-				element: document.getElementById('waypoint-item'),
-				handler: function(direction) {
-					console.log(direction);
-					direction  == 'down' ? $('#toolbar').show(100) : $('#toolbar').hide(300);
-				}
-			})
-		</script>
-	</body>
+	// 滚动侦听
+	var waypoint = new Waypoint({
+		element: document.getElementById('waypoint-item'),
+		handler: function(direction) {
+			console.log(direction);
+			direction  == 'down' ? $('#toolbar').show(100) : $('#toolbar').hide(300);
+		}
+	})
+</script>
+</body>
 </html>

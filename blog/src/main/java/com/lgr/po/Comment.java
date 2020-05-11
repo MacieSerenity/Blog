@@ -21,7 +21,7 @@ public class Comment {
     @Id
     @GeneratedValue
     private Long id;
-    private String nickName;
+    private String nickname;
     private String Email;
     private String content;
 //    头像
@@ -33,6 +33,7 @@ public class Comment {
     @ManyToOne
     private Blog blog;
 
+    private Boolean isAdmin;
 
 //    评论关系映射
 //    一个父评论可以有多个子评论

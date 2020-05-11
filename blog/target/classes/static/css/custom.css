@@ -2,6 +2,9 @@ body {
 	background: url(../img/bg/bg.png);
 }
 
+
+
+
 /* padding===================== */
 
 .c-padded-mini {
@@ -131,6 +134,11 @@ body {
 /* color=================================== */
 .c-black {
 	color: #333;
+}
+
+/*color*/
+.m-teal{
+	color: #00B5AD;
 }
 
 /* 右上角菜单按钮在平时为隐藏 */
