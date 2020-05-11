@@ -29,4 +29,6 @@ public interface TypeService {
 
     //用于返回一个所有type的list用于添加，查看，搜索分类
     List<Type> listType();
+
+    List<Type> listTypeTop(Integer size);
 }

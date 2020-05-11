@@ -27,10 +27,12 @@
             <a href="#" class="c-item item c-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="clone icon"></i>归档</a>
             <a href="#" class="c-item item c-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="info icon"></i>关于我</a>
             <div class="right c-item item c-mobile-hide">
-                <div class="ui icon inverted transparent input">
-                    <input type="text" name="" id="" value="" placeholder="搜索....." />
-                    <i class="search link icon"></i>
-                </div>
+                <form name="search" action="#" th:action="@{/search/}" target="_blank" method="post">
+                    <div class="ui icon inverted transparent input">
+                        <input type="text" name="query" id="" value="" placeholder="搜索....." th:value="${query}"/>
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -69,14 +71,13 @@
             </div>
             <div class="seven wide column">
                 <h4 class="ui inverted header">MacieSerenity</h4>
-                <p class="c-text-lined c-text-thin c-text-spaced">欢迎来到我的博客，这是我第一个SpringBoot的项目，希望我的内容能对你有帮助</p>
-                <p class="c-text-lined c-text-thin c-text-spaced">this is my first SpringBoot Project fot study and welcom to my
-                    Blog.</p>
+                <p class="c-text-lined c-text-thin c-text-spaced">欢迎来到我的博客，希望我的内容能对你有帮助</p>
+                <p class="c-text-lined c-text-thin c-text-spaced">welcome to my blog. hope u can find help here</p>
             </div>
         </ui>
         <!-- 分割线 -->
         <div class="ui inverted section divider"></div>
-        <p class="c-text-lined c-opacity-tiny c-text-thin c-text-spaced">@Copyright什么什么的</p>
+        <p class="c-text-lined c-opacity-tiny c-text-thin c-text-spaced">@Copyright 巴啦啦小魔仙</p>
     </div>
 </footer>
 

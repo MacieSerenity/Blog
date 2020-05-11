@@ -22,5 +22,6 @@ public interface TagService {
     List<Tag> listTag();
     List<Tag> listTag(String ids);
     Tag getTagByName(String name);
+    List<Tag> listTagTop(Integer size);
 
 }

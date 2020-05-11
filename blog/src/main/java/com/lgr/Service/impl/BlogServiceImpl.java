@@ -6,10 +6,13 @@ import com.lgr.po.Blog;
 import com.lgr.po.Type;
 import com.lgr.service.BlogService;
 import com.lgr.vo.BlogQuery;
+import com.util.MarkDownUtils;
 import com.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -85,6 +88,38 @@ public class BlogServiceImpl implements BlogService {
         },pageable);
     }
 
+    @Override
+    public Page<Blog> listBlog(Pageable pageable) {
+        return blogRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Blog> listBlog(String query, Pageable pageable) {
+        return blogRepository.findByQuery(query,pageable);
+    }
+
+
+    /**
+     * @Description: 处理MarkDown转为Html
+     * @Method: getAndConvert
+     * @Param: [id]
+     * @return: com.lgr.po.Blog
+     * @Author: MacieSerenity
+     * @Date: 2020/5/11
+     */
+    @Override
+    public Blog getAndConvert(Long id) {
+        Blog blog=blogRepository.findById(id).get();
+        if (blog==null){
+            throw new NotFoundException("博客不存在");
+        }
+        Blog b=new Blog();
+        BeanUtils.copyProperties(blog,b);
+        String content=b.getContent();
+        b.setContent(MarkDownUtils.markdownToHtmlExtensions(content));
+        return b;
+    }
+
     @Transactional
     @Override
     public Blog saveBlog(Blog blog) {
@@ -118,5 +153,13 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void deleteBlog(Long id) {
         blogRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Blog> listBlogRecommendTop(Integer size) {
+//        Pageable pageable= PageRequest.of(0,size, Sort.Direction.DESC,"updateTime");
+        Sort sort=Sort.by(Sort.Direction.DESC,"updateTime");
+        Pageable pageable=PageRequest.of(0,size,sort);
+        return blogRepository.findTop(pageable);
     }
 }

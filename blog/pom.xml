@@ -96,6 +96,28 @@
         </dependency>
 
 
+<!--        markDown转HTML-->
+<!--        基本-->
+        <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark</artifactId>
+            <version>0.14.0</version>
+        </dependency>
+<!--扩展-->
+<!--        标题-->
+        <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark-ext-heading-anchor</artifactId>
+            <version>0.10.0</version>
+        </dependency>
+<!--        表格-->
+        <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark-ext-gfm-tables</artifactId>
+            <version>0.10.0</version>
+        </dependency>
+<!--        /markDown转HTML-->
+
     </dependencies>
 
     <build>

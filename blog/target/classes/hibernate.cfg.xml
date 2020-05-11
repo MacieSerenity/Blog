@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">
+      <![CDATA[jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC]]></property>
+    <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <mapping resource="HibernateSequence.hbm.xml"/>
+    <mapping class="com.lgr.pojo.HibernateSequence"/>
+    <mapping resource="TBlog.hbm.xml"/>
+    <mapping class="com.lgr.pojo.TBlog"/>
+    <mapping resource="TBlogTaglist.hbm.xml"/>
+    <mapping class="com.lgr.pojo.TBlogTaglist"/>
+    <mapping resource="TComment.hbm.xml"/>
+    <mapping class="com.lgr.pojo.TComment"/>
+    <mapping resource="TTag.hbm.xml"/>
+    <mapping class="com.lgr.pojo.TTag"/>
+    <mapping resource="TType.hbm.xml"/>
+    <mapping class="com.lgr.pojo.TType"/>
+    <mapping resource="TUser.hbm.xml"/>
+    <mapping class="com.lgr.pojo.TUser"/>
+    <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
