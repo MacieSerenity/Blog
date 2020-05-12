@@ -3,6 +3,7 @@ package com.lgr.service.impl;
 import com.lgr.NotFoundException;
 import com.lgr.dao.BlogRepository;
 import com.lgr.po.Blog;
+import com.lgr.po.Tag;
 import com.lgr.po.Type;
 import com.lgr.service.BlogService;
 import com.lgr.vo.BlogQuery;
@@ -17,10 +18,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
+
 import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,9 +47,10 @@ public class BlogServiceImpl implements BlogService {
 
 //    使用jpa封装的一个对比实体中是否有值的方法Specification
 //    需要再Repository继承JpaSpecificationExecutor<Blog>类
+//    后台查看视图
     @Transactional
     @Override
-    public Page<Blog> listBlog(Pageable pageable,BlogQuery blogQuery) {
+    public Page<Blog> listBlogAdmin(Pageable pageable,BlogQuery blogQuery) {
         return blogRepository.findAll(new Specification<Blog>(){
 //            实现它的方法
             @Override
@@ -78,7 +78,26 @@ public class BlogServiceImpl implements BlogService {
                     System.out.println("IS RECOMMEND");
                     predicateList.add(criteriaBuilder.equal(root.<Boolean>get("recommend"),blogQuery.isRecommend()));
                 }
+//                执行查询
+                query.where(predicateList.toArray(new Predicate[predicateList.size()]));
+//                不需要返回值,自动封装到pageable中
+                return null;
+            }
+        },pageable);
+    }
 
+//前台看视图
+    @Transactional
+    @Override
+    public Page<Blog> listBlog(Pageable pageable,BlogQuery blogQuery) {
+        return blogRepository.findAll(new Specification<Blog>(){
+            //            实现它的方法
+            @Override
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+//                新建一个Predicate对象的数组，存放用于搜索的条件
+                List<Predicate> predicateList = new ArrayList<>();
+                predicateList.add(criteriaBuilder.equal(root.<Type>get("type").get("id"),blogQuery.getId()));
+                predicateList.add(criteriaBuilder.equal(root.<Boolean>get("published"),true));
 //                执行查询
                 query.where(predicateList.toArray(new Predicate[predicateList.size()]));
 //                不需要返回值,自动封装到pageable中
@@ -89,12 +108,25 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Page<Blog> listBlog(Pageable pageable) {
-        return blogRepository.findAll(pageable);
+//        修改查询为返回只发布的
+//        return blogRepository.findAll(pageable);
+        return blogRepository.findAllByPublished(true,pageable);
     }
 
     @Override
     public Page<Blog> listBlog(String query, Pageable pageable) {
         return blogRepository.findByQuery(query,pageable);
+    }
+
+    @Override
+    public Page<Blog> listBlog(Long tagid, Pageable pageable) {
+        return blogRepository.findAll(new Specification<Blog>() {
+            @Override
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                Join join=root.join("tags");
+                return criteriaBuilder.equal(join.get("id"),tagid);
+            }
+        },pageable);
     }
 
 

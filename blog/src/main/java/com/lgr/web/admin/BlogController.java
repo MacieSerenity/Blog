@@ -54,15 +54,15 @@ public class BlogController {
     public String blog(@PageableDefault(size = 10,sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blogQuery, Model model){
         //返回一个type类型的数据
         model.addAttribute("types",typeService.listType());
-        model.addAttribute("page",blogService.listBlog(pageable,blogQuery));
-        Page<Blog> page=blogService.listBlog(pageable,blogQuery);
+        model.addAttribute("page",blogService.listBlogAdmin(pageable,blogQuery));
+        Page<Blog> page=blogService.listBlogAdmin(pageable,blogQuery);
         return "/admin/blogManage";
     }
 
 //    局部搜索，局部查询,返回blogManage里面的一个blogList片段
     @PostMapping("/blogs/search")
     public String search(@PageableDefault(size = 10,sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blogQuery, Model model){
-        model.addAttribute("page",blogService.listBlog(pageable,blogQuery));
+        model.addAttribute("page",blogService.listBlogAdmin(pageable,blogQuery));
         return "/admin/blogManage :: blogList";
     }
 
