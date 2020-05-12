@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -19,17 +20,22 @@ import java.util.List;
 public interface BlogService {
 
     Blog getBlog(Long id);
-//游客视图
+//      游客视图
     Page<Blog> listBlog(Pageable pageable, BlogQuery blog);
-//    管理员视图
+//      管理员视图
     Page<Blog> listBlogAdmin(Pageable pageable,BlogQuery blogQuery);
-
-
+//      首页更新视图
     Page<Blog> listBlog(Pageable pageable);
+//       后台搜索带条件的blog
     Page<Blog> listBlog(String query,Pageable pageable);
 
+//    归档查询所有年份
+    Map<String,List<Blog>> archiveBlog();
+//    归档Blog条数
+    Long archiveBlogCount();
 
-//    根据tagid
+
+//    根据tagid 查询带有tagid的blog
 
     Page<Blog> listBlog(Long tagid,Pageable pageable);
 
@@ -42,7 +48,6 @@ public interface BlogService {
 
     void deleteBlog(Long id);
 
+//    拿出size个 作为推荐的博客
     List<Blog> listBlogRecommendTop(Integer size);
-
-
 }

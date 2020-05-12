@@ -49,75 +49,25 @@
 							</h3>
 						</div>
 						<div class="right aligned column">
-							共<h3 class="ui orange header c-inline-block c-text-thin">${typeCount}</h3>篇博客
+							共<h3 class="ui orange header c-inline-block c-text-thin" th:text="${archiveBlogCount}"></h3>篇博客
 						</div>
 					</div>
 				</div>
 				<!-- 文章列表 -->
-				<h2 class="ui header center aligned">2020</h2>
+				<th:blockquote th:each="archiveMap:${archiveMap}">
+				<h2 class="ui header center aligned" th:text="${archiveMap.key}" >2020</h2>
 				<div class="ui fluid vertical menu">
 					<!-- 每个a标签为一个文章 -->
-					<a href="#" target="_blank" class="item">
+					<a href="#" target="_blank" class="item" th:each="blog:${archiveMap.value}" th:href="@{/blog/{id}(id=${blog.id})}">
 						<span>
 							<i class="mini teal circle icon"></i>
-							狗屁不通文章生成器
-							<span class="ui teal basic left label c-padded-mini">${time}</span>
+							<span th:text="${blog.title}">123</span>
+							<span class="ui teal basic left label c-padded-mini" th:text="${#dates.format(blog.updateTime,'MMMdd')}">${time}</span>
 						</span>
-						<span class="ui orange basic left label c-padded-mini">${type}</span>
-					</a>
-					
-					<a href="#" target="_blank" class="item">
-						<span>
-							<i class="mini teal circle icon"></i>
-							狗屁不通文章生成器
-							<span class="ui teal basic left label c-padded-mini">${time}</span>
-						</span>
-						<span class="ui orange basic left label c-padded-mini">${type}</span>
-					</a>
-					
-					<a href="#" target="_blank" class="item">
-						<span>
-							<i class="mini teal circle icon"></i>
-							狗屁不通文章生成器
-							<span class="ui teal basic left label c-padded-mini">${time}</span>
-						</span>
-						<span class="ui orange basic left label c-padded-mini">${type}</span>
+						<span class="ui orange basic left label c-padded-mini" th:text="${blog.flag}">${type}</span>
 					</a>
 				</div>
-				
-				<!-- 不同年份的文章列表 -->
-				
-				<h2 class="ui header center aligned">2019</h2>
-				<div class="ui fluid vertical menu">
-					<!-- 每个a标签为一个文章 -->
-					<a href="#" target="_blank" class="item">
-						<span>
-							<i class="mini teal circle icon"></i>
-							狗屁不通文章生成器
-							<span class="ui teal basic left label c-padded-mini">${time}</span>
-						</span>
-						<span class="ui orange basic left label c-padded-mini">${type}</span>
-					</a>
-					
-					<a href="#" target="_blank" class="item">
-						<span>
-							<i class="mini teal circle icon"></i>
-							狗屁不通文章生成器
-							<span class="ui teal basic left label c-padded-mini">${time}</span>
-						</span>
-						<span class="ui orange basic left label c-padded-mini">${type}</span>
-					</a>
-					
-					<a href="#" target="_blank" class="item">
-						<span>
-							<i class="mini teal circle icon"></i>
-							狗屁不通文章生成器
-							<span class="ui teal basic left label c-padded-mini">${time}</span>
-						</span>
-						<span class="ui orange basic left label c-padded-mini">${type}</span>
-					</a>
-				</div>
-				
+				</th:blockquote>
 			</div>
 		</div>
 		<!-- 底部footer -->

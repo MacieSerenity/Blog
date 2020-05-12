@@ -24,7 +24,7 @@ public interface BlogRepository extends JpaRepository<Blog,Long>, JpaSpecificati
 
 	//select * from t_blog where title like ?1
 	//select * from t_blog where title like '% ?1 %‘
-	@Query("select b from t_blog b where b.title like ?1 or b.content like ?1 and b.published = true")
+	@Query("select b from t_blog b where b.title like ?1 and b.content like ?1 and b.published = true")
 	Page<Blog> findByQuery(String query,Pageable pageable);
 
 	@Modifying
@@ -35,4 +35,13 @@ public interface BlogRepository extends JpaRepository<Blog,Long>, JpaSpecificati
 	@Query("select b from t_blog b where b.published = ?1")
 	Page<Blog> findAllByPublished(Boolean boo,Pageable pageable);
 
+	@Query("select function('date_format',b.updateTime,'%Y') as year from t_blog b group by function('date_format',b.updateTime,'%Y') order by year desc")
+	List<String> findGroupYear();
+
+	//    归档查询年份所有Blog
+	@Query("select b from t_blog b where function('date_format',b.updateTime,'%Y') = ?1 and b.published=true ")
+	List<Blog> findByYear(String year);
+
+	@Query("select count(b) from t_blog b where b.published=true")
+	Long countPublished();
 }
