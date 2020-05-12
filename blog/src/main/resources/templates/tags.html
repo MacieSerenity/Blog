@@ -56,7 +56,7 @@
 				<div class="ui bottom attached segment c-padded-tb-large">
 					<div class="ui labeled button c-margin-tb-small" th:each="tag:${tags}">
 						<a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui basic button" th:text="${tag.name}" th:classappend="${tag.id==activeTagId} ? 'teal'">方法论</a>
-						<div class="ui basic left pointing label" th:text="${#arrays.length(tag.blogs)}" th:classappend="${tag.id==activeTagId} ? 'teal'">0</div>
+						<div class="ui basic left pointing label" th:text="${#arrays.length(tag.blogList)}" th:classappend="${tag.id==activeTagId} ? 'teal'">0</div>
 					</div>
 				</div>
 
@@ -88,7 +88,7 @@
 									</div>
 									<div class="row">
 										<div class="column">
-											<a href="#" class="ui basic left pointing label c-padded-mini c-text-thin" th:each="tag:${blog.tags}" th:text="${tag.name}" th:href="@{/tags/{id}(id=${tag.id})}" th:classappend="${tag.id==activeTagId} ? 'teal'">方法论</a>
+											<a href="#" class="ui basic left pointing label c-padded-mini c-text-thin" th:each="tag:${blog.taglist}" th:text="${tag.name}" th:href="@{/tags/{id}(id=${tag.id})}" th:classappend="${tag.id==activeTagId} ? 'teal'">方法论</a>
 										</div>
 									</div>
 								</div>

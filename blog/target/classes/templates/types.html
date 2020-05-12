@@ -60,6 +60,7 @@
 				<div class="ui basic left pointing label" th:text="${#arrays.length(type.blogs)}" th:classappend="${type.id==activeTypeId} ? 'teal'">0</div>
 			</div>
 		</div>
+
 		<div class="ui teal top attached segment">
 			<div class="ui padded vertical segment" th:each="blog:${page.content}">
 				<div class="ui middle aligned grid stackable mobile reversed">
@@ -94,6 +95,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 	<!-- bottom -->
 	<div class="ui bottom attached segment" th:if="${page.totalPages}>1">

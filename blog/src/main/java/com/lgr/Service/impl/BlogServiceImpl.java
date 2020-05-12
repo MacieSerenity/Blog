@@ -3,7 +3,6 @@ package com.lgr.service.impl;
 import com.lgr.NotFoundException;
 import com.lgr.dao.BlogRepository;
 import com.lgr.po.Blog;
-import com.lgr.po.Tag;
 import com.lgr.po.Type;
 import com.lgr.service.BlogService;
 import com.lgr.vo.BlogQuery;
@@ -13,17 +12,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
+import java.util.*;
 
-import org.springframework.data.domain.Pageable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -123,7 +120,7 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findAll(new Specification<Blog>() {
             @Override
             public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-                Join join=root.join("tags");
+                Join join=root.join("taglist");
                 return criteriaBuilder.equal(join.get("id"),tagid);
             }
         },pageable);

@@ -45,7 +45,7 @@
 					<div class="ui middle aligned two column grid">
 						<div class="column">
 							<h3 class="ui teal header">
-								分类
+								标签
 							</h3>
 						</div>
 						<div class="right aligned column">
@@ -54,249 +54,48 @@
 					</div>
 				</div>
 				<div class="ui bottom attached segment c-padded-tb-large">
-					<a href="#" target="_blank" class="ui teal basic left pointing large label c-margin-tb-tiny">
-						方法论
-						<div class="detail">23</div>
-					</a>
-					<a href="#" target="_blank" class="ui  basic left pointing large label c-margin-tb-tiny">
-						方
-						<div class="detail">23</div>
-					</a>
-					<a href="#" target="_blank" class="ui  basic left pointing large label c-margin-tb-tiny">
-						法
-						<div class="detail">23</div>
-					</a>
-					<a href="#" target="_blank" class="ui  basic left pointing large label c-margin-tb-tiny">
-						论
-						<div class="detail">23</div>
-					</a>
-					<a href="#" target="_blank" class="ui  basic left pointing large label c-margin-tb-tiny">
-						方法论
-						<div class="detail">23</div>
-					</a>
-					<a href="#" target="_blank" class="ui  basic left pointing large label c-margin-tb-tiny">
-						方法论
-						<div class="detail">23</div>
-					</a>
-					<a href="#" target="_blank" class="ui  basic left pointing large label c-margin-tb-tiny">
-						法
-						<div class="detail">23</div>
-					</a>
-					<a href="#" target="_blank" class="ui  basic left pointing large label c-margin-tb-tiny">
-						论
-						<div class="detail">23</div>
-					</a>
-					<a href="#" target="_blank" class="ui  basic left pointing large label c-margin-tb-tiny">
-						方法论
-						<div class="detail">23</div>
-					</a>
-					<a href="#" target="_blank" class="ui  basic left pointing large label c-margin-tb-tiny">
-						方法论
-						<div class="detail">23</div>
-					</a>
+					<div class="ui labeled button c-margin-tb-small" th:each="tag:${tags}">
+						<a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui basic button" th:text="${tag.name}" th:classappend="${tag.id==activeTagId} ? 'teal'">方法论</a>
+						<div class="ui basic left pointing label" th:text="${#arrays.length(tag.blogList)}" th:classappend="${tag.id==activeTagId} ? 'teal'">0</div>
+					</div>
 				</div>
 
 				<div class="ui teal top attached segment">
-					<div class="ui padded vertical segment c-padded-tb-large c-padded-lr-clear">
-						<div class="ui grid stackable mobile reversed">
+					<div class="ui padded vertical segment" th:each="blog:${page.content}">
+						<div class="ui middle aligned grid stackable mobile reversed">
 							<div class="eleven wide column">
-								<h3 class="ui header">Hello，World</h3>
-								<p>Hello，World <br> hi,SpringBoot</p>
+								<h3 class="ui header"><a th:href="@{/blog/{id}(id=${blog.id})}" href="#" th:text="${blog.title}" target="_blank" class="c-black">Hello,World</a></h3>
+								<p th:text="|${blog.description}......|">Hello，World , hi,SpringBoot</p>
 								<div class="ui stackable grid">
 									<div class="row">
 										<div class="eleven wide column">
 											<div class="ui link list horizontal">
 												<div class="item">
-													<img src="https://unsplash.it/100/100?image=1005" alt="" class="ui avatar image">
-													<div class="content"><a href="#" target="_blank" class="header">MacieSerenity</a></div>
+													<img th:src="@{${blog.user.avatar}}" src="https://unsplash.it/100/100?image=1005" alt="" class="ui avatar image">
+													<div class="content"><a th:text="${blog.user.nickname}" href="#" target="_blank" class="header">MacieSerenity</a></div>
 												</div>
 												<div class="item">
-													<i class="calendar icon"></i>{$time}
+													<i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}"></span>
 												</div>
 												<div class="item">
-													<i class="eye icon"></i>{$clickCount}
+													<i class="eye icon"></i><span th:text="${blog.views}"></span>
 												</div>
 											</div>
 										</div>
 										<div class="right aligned five wide column">
-											<a href="" target="_blank" class="ui label teal basic c-padded-tiny c-text-thin">认知升级</a>
+											<a href="" target="_blank" class="ui label teal basic c-padded-tiny c-text-thin" th:text="${blog.type.name}">认知升级</a>
 										</div>
 									</div>
-									<div class="row c-row-padded-lr">
-										<div class="column">
-											<a href="#" class="ui basic teal left pointing label c-padded-mini c-text-thin">方法论</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="five wide column">
-								<a href="#" target="_blank">
-									<img src="https://unsplash.it/800/450?image=1005" alt="" class="ui rounded image" wid>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="ui attached segment">
-					<div class="ui padded vertical segment c-padded-tb-large c-padded-lr-clear">
-						<div class="ui grid stackable mobile reversed">
-							<div class="eleven wide column">
-								<h3 class="ui header">Hello，World</h3>
-								<p>Hello，World <br> hi,SpringBoot</p>
-								<div class="ui stackable grid">
 									<div class="row">
-										<div class="eleven wide column">
-											<div class="ui link list horizontal">
-												<div class="item">
-													<img src="https://unsplash.it/100/100?image=1005" alt="" class="ui avatar image">
-													<div class="content"><a href="#" target="_blank" class="header">MacieSerenity</a></div>
-												</div>
-												<div class="item">
-													<i class="calendar icon"></i>{$time}
-												</div>
-												<div class="item">
-													<i class="eye icon"></i>{$clickCount}
-												</div>
-											</div>
-										</div>
-										<div class="right aligned five wide column">
-											<a href="" target="_blank" class="ui label teal basic c-padded-tiny c-text-thin">认知升级</a>
-										</div>
-									</div>
-									<div class="row c-row-padded-lr">
 										<div class="column">
-											<a href="#" class="ui basic teal left pointing label c-padded-mini c-text-thin">方法论</a>
+											<a href="#" class="ui basic left pointing label c-padded-mini c-text-thin" th:each="tag:${blog.taglist}" th:text="${tag.name}" th:href="@{/tags/{id}(id=${tag.id})}" th:classappend="${tag.id==activeTagId} ? 'teal'">方法论</a>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="five wide column">
-								<a href="#" target="_blank">
-									<img src="https://unsplash.it/800/450?image=1005" alt="" class="ui rounded image" wid>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="ui attached segment">
-					<div class="ui padded vertical segment c-padded-tb-large c-padded-lr-clear">
-						<div class="ui grid stackable mobile reversed">
-							<div class="eleven wide column">
-								<h3 class="ui header">Hello，World</h3>
-								<p>Hello，World <br> hi,SpringBoot</p>
-								<div class="ui stackable grid">
-									<div class="row">
-										<div class="eleven wide column">
-											<div class="ui link list horizontal">
-												<div class="item">
-													<img src="https://unsplash.it/100/100?image=1005" alt="" class="ui avatar image">
-													<div class="content"><a href="#" target="_blank" class="header">MacieSerenity</a></div>
-												</div>
-												<div class="item">
-													<i class="calendar icon"></i>{$time}
-												</div>
-												<div class="item">
-													<i class="eye icon"></i>{$clickCount}
-												</div>
-											</div>
-										</div>
-										<div class="right aligned five wide column">
-											<a href="" target="_blank" class="ui label teal basic c-padded-tiny c-text-thin">认知升级</a>
-										</div>
-									</div>
-									<div class="row c-row-padded-lr">
-										<div class="column">
-											<a href="#" class="ui basic teal left pointing label c-padded-mini c-text-thin">方法论</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="five wide column">
-								<a href="#" target="_blank">
-									<img src="https://unsplash.it/800/450?image=1005" alt="" class="ui rounded image" wid>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="ui attached segment">
-					<div class="ui padded vertical segment c-padded-tb-large c-padded-lr-clear">
-						<div class="ui grid stackable mobile reversed">
-							<div class="eleven wide column">
-								<h3 class="ui header">Hello，World</h3>
-								<p>Hello，World <br> hi,SpringBoot</p>
-								<div class="ui stackable grid">
-									<div class="row">
-										<div class="eleven wide column">
-											<div class="ui link list horizontal">
-												<div class="item">
-													<img src="https://unsplash.it/100/100?image=1005" alt="" class="ui avatar image">
-													<div class="content"><a href="#" target="_blank" class="header">MacieSerenity</a></div>
-												</div>
-												<div class="item">
-													<i class="calendar icon"></i>{$time}
-												</div>
-												<div class="item">
-													<i class="eye icon"></i>{$clickCount}
-												</div>
-											</div>
-										</div>
-										<div class="right aligned five wide column">
-											<a href="" target="_blank" class="ui label teal basic c-padded-tiny c-text-thin">认知升级</a>
-										</div>
-									</div>
-									<div class="row c-row-padded-lr">
-										<div class="column">
-											<a href="#" class="ui basic teal left pointing label c-padded-mini c-text-thin">方法论</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="five wide column">
-								<a href="#" target="_blank">
-									<img src="https://unsplash.it/800/450?image=1005" alt="" class="ui rounded image" wid>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="ui attached segment">
-					<div class="ui padded vertical segment c-padded-tb-large c-padded-lr-clear">
-						<div class="ui grid stackable mobile reversed">
-							<div class="eleven wide column">
-								<h3 class="ui header">Hello，World</h3>
-								<p>Hello，World <br> hi,SpringBoot</p>
-								<div class="ui stackable grid">
-									<div class="row">
-										<div class="eleven wide column">
-											<div class="ui link list horizontal">
-												<div class="item">
-													<img src="https://unsplash.it/100/100?image=1005" alt="" class="ui avatar image">
-													<div class="content"><a href="#" target="_blank" class="header">MacieSerenity</a></div>
-												</div>
-												<div class="item">
-													<i class="calendar icon"></i>{$time}
-												</div>
-												<div class="item">
-													<i class="eye icon"></i>{$clickCount}
-												</div>
-											</div>
-										</div>
-										<div class="right aligned five wide column">
-											<a href="" target="_blank" class="ui label teal basic c-padded-tiny c-text-thin">认知升级</a>
-										</div>
-									</div>
-									<div class="row c-row-padded-lr">
-										<div class="column">
-											<a href="#" class="ui basic teal left pointing label c-padded-mini c-text-thin">方法论</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="five wide column">
-								<a href="#" target="_blank">
-									<img src="https://unsplash.it/800/450?image=1005" alt="" class="ui rounded image" wid>
+								<a href="#" target="_blank" th:href="@{/blog/{id}(id=${blog.id})}">
+									<img th:src="@{${blog.firstPicture}}" src="https://unsplash.it/800/450?image=1005" alt="" class="ui rounded image">
 								</a>
 							</div>
 						</div>
@@ -304,13 +103,13 @@
 				</div>
 			</div>
 			<!-- bottom -->
-			<div class="ui bottom attached segment">
+			<div class="ui bottom attached segment" th:if="${page.totalPages}>1">
 				<div class="ui middle aligned grid two column">
 					<div class="column">
-						<a href="" class="button teal basic ui">上一页</a>
+						<a href="#" th:unless="${page.first}" th:href="@{/(page=${page.number}-1)}" class="ui mini teal basic button">上一页</a>
 					</div>
 					<div class="right aligned column">
-						<a href="" class="button teal basic ui">下一页</a>
+						<a th:unless="${page.last}" th:href="@{/(page=${page.number}+1)}" class="ui mini teal basic button">下一页</a>
 					</div>
 				</div>
 			</div>
