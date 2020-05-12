@@ -57,30 +57,34 @@
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header">最新文章</h4>
-                <div class="ui inverted link list">
-                    <a href="#" class="item">item1</a>
-                    <a href="#" class="item">item2</a>
-                    <a href="#" class="item">item3</a>
+                <div class="newBlog-container">
+                    <div class="ui inverted link list" th:each="newblog:${newblogs}">
+                        <a href="#" th:href="@{/blog/{id}(id=${newblog.id})}"
+                           target="_blank" class="item"
+                           th:text="${newblog.title}">item1</a>
+                    </div>
                 </div>
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header">联系我</h4>
                 <div class="ui inverted link list">
-                    <a href="#" class="item">rad1sh_rush@qq.com</a>
-                    <a href="#" class="item">QQ:1594425336</a>
+                    <a href="#" class="item" th:href="@{/about}" >邮箱：<span th:text="#{index.email}"></span></a>
+                    <a href="#" class="item" th:href="@{/about}" >QQ: <span th:text="#{index.QQ}"></span></a>
                 </div>
             </div>
             <div class="seven wide column">
-                <h4 class="ui inverted header">MacieSerenity</h4>
-                <p class="c-text-lined c-text-thin c-text-spaced">欢迎来到我的博客，希望我的内容能对你有帮助</p>
-                <p class="c-text-lined c-text-thin c-text-spaced">welcome to my blog. hope u can find help here</p>
+                <h4 class="ui inverted header" th:text="#{index.BlogName}">MacieSerenity</h4>
+                <p class="c-text-lined c-text-thin c-text-spaced" >欢迎来到我的博客，希望我的内容能对你有帮助</p>
+                <p class="c-text-lined c-text-thin c-text-spaced" >welcome to my blog. hope u can find help here</p>
             </div>
         </ui>
         <!-- 分割线 -->
         <div class="ui inverted section divider"></div>
         <p class="c-text-lined c-opacity-tiny c-text-thin c-text-spaced">@Copyright 巴啦啦小魔仙</p>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     </div>
 </footer>
+
 
 </body>
 </html>

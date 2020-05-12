@@ -44,6 +44,7 @@ public class ShowTypeController {
 		model.addAttribute("types",typeList);
 		model.addAttribute("page",blogService.listBlog(pageable,blogQuery));
 		model.addAttribute("activeTypeId",id);
+		model.addAttribute("newblogs",blogService.listBlogRecommendTop(3));
 		return "/types";
 	}
 }

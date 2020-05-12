@@ -40,7 +40,15 @@ public class IndexController {
         model.addAttribute("types",typeService.listTypeTop(8));
         model.addAttribute("tags",tagService.listTagTop(10));
         model.addAttribute("recommendBlogs",blogService.listBlogRecommendTop(8));
+        model.addAttribute("newblogs",blogService.listBlogRecommendTop(3));
         return "index";
+    }
+
+    @GetMapping("/newBlogList")
+    public String newBlogs(Model model){
+		model.addAttribute("newblogs",blogService.listBlogRecommendTop(3));
+//        model.addAttribute("recommendBlogs",blogService.listBlogRecommendTop(3));
+        return "_fragment :: newbloglist";
     }
 
     @PostMapping("/search")

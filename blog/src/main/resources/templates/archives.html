@@ -55,7 +55,7 @@
 				</div>
 				<!-- 文章列表 -->
 				<th:blockquote th:each="archiveMap:${archiveMap}">
-				<h2 class="ui header center aligned" th:text="${archiveMap.key}" >2020</h2>
+				<h2 class="ui header center aligned c-padded-tb-big" th:text="${archiveMap.key}" >2020</h2>
 				<div class="ui fluid vertical menu">
 					<!-- 每个a标签为一个文章 -->
 					<a href="#" target="_blank" class="item" th:each="blog:${archiveMap.value}" th:href="@{/blog/{id}(id=${blog.id})}">
@@ -111,7 +111,9 @@
 
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 		<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
-
+		<script type="text/javascript">
+			$("#newBlog-container").load(/*[[@{/newBlogList}]]*/"");
+		</script>
 		<script type="text/javascript">
 			$('.menu.toggle').click(function() {
 				$('.c-item').toggleClass('c-mobile-hide');

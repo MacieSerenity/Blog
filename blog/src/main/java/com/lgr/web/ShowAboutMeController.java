@@ -9,21 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * Created with IntelliJ IDEA.
  * User: MacieSerenity
- * Date: 2020/05/12 15:26
+ * Date: 2020/05/12 16:18
  * Description:
  * Version: V1.0
  */
 @Controller
-public class archivesController {
+public class ShowAboutMeController {
 
 	@Autowired
 	BlogService blogService;
 
-	@GetMapping("/archives")
-	public String archives(Model model){
-		model.addAttribute("archiveMap",blogService.archiveBlog());
-		model.addAttribute("archiveBlogCount",blogService.archiveBlogCount());
+	@GetMapping("/about")
+	public String show(Model model){
 		model.addAttribute("newblogs",blogService.listBlogRecommendTop(3));
-		return "/archives";
+		return "/about";
 	}
 }

@@ -39,6 +39,7 @@ public class ShowTagsController {
 		model.addAttribute("tags", tags);
 		model.addAttribute("page", blogService.listBlog(id,pageable));
 		model.addAttribute("activeTagId", id);
+		model.addAttribute("newblogs",blogService.listBlogRecommendTop(3));
 		return "/tags";
 	}
 }

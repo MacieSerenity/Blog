@@ -91,30 +91,34 @@
 					标签
 				</div>
 			</div>
-			<!-- 赞赏 -->
-			<div class="ui segment center aligned basic">
-				<button id="reward" class="ui orange basic circular button">赞赏</button>
-			</div>
-			<!-- 打赏的二维码 -->
-			<div class="ui rewardPic flowing popup transition hidden">
-				<div class="ui orange basic label">
-					<div class="ui images" style="font-size: inherit;">
-						<div class="image">
-							<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" alt="" class="ui rounded bordered image" style="width: 120px;">
-							<div>支付宝</div>
-						</div>
-						<div class="image">
-							<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" alt="" class="ui rounded bordered image" style="width: 120px;">
-							<div>微信</div>
+
+			<div th:if="${blog.appreciation}">
+				<!-- 赞赏 -->
+				<div class="ui segment center aligned basic">
+					<button id="reward" class="ui orange basic circular button">赞赏</button>
+				</div>
+				<!-- 打赏的二维码 -->
+				<div class="ui rewardPic flowing popup transition hidden">
+					<div class="ui orange basic label">
+						<div class="ui images" style="font-size: inherit;">
+							<div class="image">
+								<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" alt="" class="ui rounded bordered image" style="width: 120px;">
+								<div>支付宝</div>
+							</div>
+							<div class="image">
+								<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" alt="" class="ui rounded bordered image" style="width: 120px;">
+								<div>微信</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
 		</div>
 
 
 		<!-- 博客信息说明区域 -->
-		<div class="ui message positive attached">
+		<div class="ui message positive attached" th:if="${blog.shareStatement}">
 			<div class="ui middle aligned grid">
 				<!-- 信息左边文字说明 -->
 				<div class="eleven wide column">
@@ -137,7 +141,7 @@
 		</div>
 
 		<!-- 评论区 -->
-		<div class="ui segment bottom attached ">
+		<div class="ui segment bottom attached " th:if="${blog.commentabled}">
 			<!-- 留言列表 -->
 			<div class="ui teal segment"  id="comment-container">
 				<div th:fragment="commentList">
@@ -304,7 +308,9 @@
 <script src="../static/lib/tocBot/tocbot.min.js" type="text/jscript" th:src="@{/lib/tocBot/tocbot.min.js}"></script>
 <script src="../static/lib/qrcode/qrcode.min.js" type="text/javascript" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
 <script src="../static/lib/waypoints/jquery.waypoints.min.js" type="text/javascript" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
-
+<script type="text/javascript">
+	$("#newBlog-container").load(/*[[@{/newBlogList}]]*/"");
+</script>
 <script type="text/javascript" th:inline="javascript">
 	// 提交时进行表单验证
 	$("#comment-sub").click(function () {
@@ -384,7 +390,7 @@
 	});
 
 	// 二维码自动生成
-	var serurl="localhost:8080";
+	var serurl=/*[[#{blog.serurl}]]*/"localhost:8080";
 	var url=/*[[@{/blog/{id}(id=${blog.id})}]]*/"";
 	var qrcode = new QRCode("wechatQRbt", {
 		text: serurl+url,
